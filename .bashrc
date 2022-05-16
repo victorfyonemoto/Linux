@@ -1,6 +1,5 @@
 # My bash config
 # ~/.bashrc
-#
 
 #EXPORT
 export TERM="xterm-256color" # getting proper colors
@@ -107,6 +106,9 @@ fi
 unset use_color safe_term match_lhs sh
 
 #ALIASES
+
+# bare git repo alias for dotfiles
+alias config="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 
 #vim and emacs
 
