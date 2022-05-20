@@ -19,6 +19,12 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 ### "nvim" as manpager
 # export MANPAGER="nvim -c 'set ft=man' -"
 
+### SET VI MODE ###
+# Comment this line out to enable default emacs-like bindings
+set -o vi
+bind -m vi-command 'Control-l: clear-screen'
+bind -m vi-insert 'Control-l: clear-screen'
+
 
 [[ $- != *i* ]] && return
 
