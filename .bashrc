@@ -3,6 +3,9 @@
 
 #EXPORT
 export TERM="xterm-256color" # getting proper colors
+#$export ALTERNATE_EDITOR=""                        # setting for emacsclient
+#export EDITOR="emacsclient -t -a ''"              # $EDITOR use Emacs in terminal
+#export VISUAL="emacsclient -c -a emacs"           # $VISUAL use Emacs in GUI mode
 
 ### SET MANPAGER
 ### Uncomment only one of these!
@@ -110,6 +113,26 @@ unset use_color safe_term match_lhs sh
 # bare git repo alias for dotfiles
 alias config="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 
+# navigation
+up () {
+  local d=""
+  local limit="$1"
+
+  # Default to limit of 1
+  if [ -z "$limit" ] || [ "$limit" -le 0 ]; then
+    limit=1
+  fi
+
+  for ((i=1;i<=limit;i++)); do
+    d="../$d"
+  done
+
+  # perform cd. Show error if cd fails
+  if ! cd "$d"; then
+    echo "Couldn't go up $limit dirs.";
+  fi
+}
+
 #vim and emacs
 
 #alias vim="nvim"
@@ -122,7 +145,6 @@ alias doompurge="~/.emacs.d/bin/doom purge"
 
 alias mv="mv -i"                          # confirm before overwriting something
 alias cp="cp -i"                          # confirm before overwriting something
-alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias np='nano -w PKGBUILD'
 alias more=less
@@ -130,7 +152,7 @@ alias more=less
 #flags
 
 alias vifm="./.config/vifm/scripts/vifmrun" # shows images with ueberzug
-alias df="df -h" # human-readable sizes
+alias df="df -h" 		            # human-readable sizes
 
 xhost +local:root > /dev/null 2>&1
 
